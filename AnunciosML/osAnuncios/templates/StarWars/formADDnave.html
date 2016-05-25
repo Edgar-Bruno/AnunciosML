@@ -94,7 +94,7 @@
 				    										<p id="{{ PosterForm.posterIMG.auto_id }}_LAB" class="centralP_areaDivi">Insera uma imagem para o poster
 				    											<p id="erroForm">{{ PosterForm.posterIMG.errors.as_text }}</p>
 				    										</p>
-				    										<img id="{{ PosterForm.posterIMG.auto_id }}_IMG" class="thumb" src="" style="visibility:hidden">				
+				    										<img id="{{ PosterForm.posterIMG.auto_id }}_IMG" class="thumb" src="" style="display:none">				
    														</div>
 			    									</div>
 												</td>
@@ -170,7 +170,7 @@
 				    										<p id="{{ AfiliacaoForm.fotoAF.auto_id }}_LAB" class="centralP_areaDivi">Insera uma imagem para a afiliação
 				    											<p id="erroForm">{{ AfiliacaoForm.fotoAF.errors.as_text }} </p>
 				    										</p>
-				    										<img id="{{ AfiliacaoForm.fotoAF.auto_id }}_IMG" class="thumb" src="" style="visibility:hidden">				
+				    										<img id="{{ AfiliacaoForm.fotoAF.auto_id }}_IMG" class="thumb" src="" style="display:none">				
    														</div>
 			    									</div>
 			    									<br />{{ AfiliacaoForm.afiliacao.label }}
@@ -290,7 +290,7 @@
 				    							<p id="erroForm">{{ formFosTa.fotoCE.errors.as_text }} </p>
 				    						</p>
 				    						
-				    						<img id="{{ formFosTa.fotoCE.auto_id }}_IMG" class="thumb" src="" style="visibility:hidden">
+				    						<img id="{{ formFosTa.fotoCE.auto_id }}_IMG" class="thumb" src="" style="display:none">
 			    						{% else %}
 			    							<img id="{{ formFosTa.fotoCE.auto_id }}_IMG" class="thumb" src="{{ objI.fotoCE.url }}">	
 			    						{% endif %}		
@@ -307,7 +307,7 @@
 				    							<p id="erroForm">{{ formFosTa.piloto.errors.as_text }} </p>
 				    						</p>
 			    						
-			    							<img id="{{ formFosTa.piloto.auto_id }}_IMG" class="thumb" src="" style="visibility:hidden">
+			    							<img id="{{ formFosTa.piloto.auto_id }}_IMG" class="thumb" src="" style="display:none">
 			    						{% else %}
 			    							<img id="{{ formFosTa.piloto.auto_id }}_IMG" class="thumb" src="{{ objI.piloto.url }}">	
 			    						{% endif %}			
@@ -325,7 +325,7 @@
 				    							<p id="erroForm">{{ formFosTa.fotoMo.errors.as_text }} </p>
 				    						</p>
 				    						
-				    						<img id="{{ formFosTa.fotoMo.auto_id }}_IMG" class="thumb" src="" style="visibility:hidden">		
+				    						<img id="{{ formFosTa.fotoMo.auto_id }}_IMG" class="thumb" src="" style="display:none">		
 			    						{% else %}
 			    							<img id="{{ formFosTa.fotoMo.auto_id }}_IMG" class="thumb" src="{{ objI.fotoMo.url }}">	
 			    						{% endif %}				
@@ -344,7 +344,7 @@
 			    					{{ formF.fotoAN }}
 			    					<div class="inserirTXT">
 			    						<p id="{{ formF.fotoAN.auto_id }}_LAB" >Insera as fotos do anúncio</p>
-			    						<img id="{{ formF.fotoAN.auto_id }}_IMG" class="thumb" src="" style="visibility:hidden">				
+			    						<img id="{{ formF.fotoAN.auto_id }}_IMG" class="thumb" src="" style="display:none">				
    									</div>
 			    				</div>
 			    					{% if addEdit %}
