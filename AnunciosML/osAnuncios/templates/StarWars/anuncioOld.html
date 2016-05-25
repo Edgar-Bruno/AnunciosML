@@ -1,0 +1,238 @@
+{% extends "default/base.html" %}
+
+{% load staticfiles %}
+
+{% block titulo %}
+	Exibição da nave : {{ obj }}			
+{% endblock %}
+
+<style>
+{% block style %}
+/*Ainda não é a forma correta de se fazer...*/
+{{ cor }}
+
+{% endblock  style %}
+</style>
+
+{% block big_wrapper %}
+	<div id="big_wrapper">
+
+			<div id="faixaCentral">
+				{% block faixaCentral %}
+				<!-- Coloca-se aqui as imagens backgroud-->
+
+				{% endblock faixaCentral %}				
+			</div>
+
+			<header id="top_header">
+
+
+				<div id="imagenTopH">
+				<!-- Coloca-se aqui as informações / com titulo/ e pricipais-->
+					
+					<div class="corprincipal" id="tituloHeader2">
+						<h2>NAVES E VEÍCULOS</h2>
+					</div>
+					<div id="logoplaneta">
+
+						<img whidth="450" src="{% static 'img/StarWars/planeta-deagostini-g.png' %}">
+						
+					</div>
+
+					<img whidth="900" src="{% static 'img/StarWars/Star-Wars-Logo-Wallpaper2.jpg' %}">
+
+				</div>
+
+
+
+			</header>
+
+			<div id="texto">
+
+				<h1>Complete já sua coleção com essa bela miniatura.</h1>
+	Reproduções em chumbo das Naves e Veículos da mítica saga.
+	Uma coleção excepcional para os apreciadores desta epopeia inesquecível. Os veículos mais míticos e as naves mais emblemáticas da saga, selecionados e reunidos em uma incrível coleção para os fãs de Star Wars.
+
+	<h1>Miniaturas de qualidade excepcional!</h1>
+	As reproduções seguem fielmente os modelos originais e revelam uma atenção especial aos detalhes e à qualidade do acabamento. São autênticas joias de colecionador desenvolvidas especialmente para os fãs de Star Wars.
+	Os melhores especialistas da Lucasfilm contribuíram para a realização de cada miniatura, garantindo total fidelidade aos filmes e prestando atenção especial aos detalhes e à qualidade dos acabamentos
+				
+			</div>
+
+			<div id="divSection">
+
+				<section id="main_section">
+					{% block main_section %}
+
+					<div id="aside_main">
+
+						<div id="poster">
+							<img class="shadow" src="{{ poster.posterIMG.url }}">
+							<div id="txtbanners">
+								Exibido:{{ poster.lancamento|date:"d/m/Y" }}.
+								{{ poster.detalhe }}
+							</div>
+						</div>
+
+						<div id="afiliacao">
+
+							{% block afiliacao %}
+								<div id="baseInvert">
+									<img id="invertCor" height="175" width="205" src="{{ obj.afiliacao.fotoAF.url }}">
+								</div>
+								<div id="txtbanners">
+									Afiliação: {{ obj.afiliacao }}
+								</div>
+							{% endblock afiliacao %}
+						
+						</div>
+
+					</div>
+
+					<div id="banner" >
+							{% block banner_main %}
+
+							<div id="bannerTabela" class="shadow" >
+
+									<table border="0" style="width:350px;">
+										<thead>										
+											<tr>
+												<th class="corprincipal" colspan="2" align="center">Especificações da Nave</th>
+											</tr>
+										</thead>
+										<tbody class="anuncio">
+											<tr>
+												<td> Fabricante </td>
+												<td>{{ obj.fabricante.fabricante }}</td>
+											</tr>
+								
+											{% for desc in descricao %}
+
+												<tr class="{% cycle 'odd' 'even' %}">
+
+													<td>{{ desc.caracteristica }}</td>
+													<td>{{ desc.informacao }}</td>
+
+												</tr>
+											{% endfor %}	
+										</tbody>
+									</table>
+
+								</div>
+
+								<div id="titulobanner">
+							
+									<h1>{{ obj }}</h1>
+
+								</div>
+
+
+								<img class="shadow" height="615" width="536" src="{{ objNaFotos.banner.url }}">
+							{% endblock banner_main %}
+					</div>
+
+					{% endblock main_section %}
+
+				</section>
+
+					<div id="aidlayout">
+						{% block footer_section %}
+				
+								<footer id="footer_section">
+									<img class="shadow" height="200" width="233" src="{{ objNaFotos.fotoCE.url }}">
+									<div id="txtbanners" class="txtCena">
+										<h3>Cena</h3>
+										{{ obj.poster }}
+									</div>
+								</footer>
+								<footer id="footer_section">
+									<img class="shadow" height="200" width="231" src="{{ objNaFotos.piloto.url }}">
+									
+									<div id="txtbanners">
+										 <h3>Piloto</h3>
+										{{ obj.nomepiloto }} <p> <br /></p>
+									</div>
+								</footer>
+								<footer id="footer_section">
+									<img class="shadow" height="200" width="231" src="{{ objNaFotos.fotoMo.url }}">
+									<div id="txtbanners">
+											<h3>Modelo</h3>
+											<p> <br /> <br /></p>
+									</div>
+								</footer>
+
+						{% endblock footer_section %}
+					</div>
+			</div>
+
+		<div class="corprincipal">
+			<h2>FOTOS DO PRODUTO</h2>
+		</div>
+
+		<div>
+		<div id="aidlayout">
+			{% block fotosanunicos %}
+				{% for imagem in fotoanuncio %}
+					<div id="fotoanuncio">
+						<img class="shadow" height="385" width="385" src="{{ imagem.fotoAN.url }}"><br />
+					</div>
+				{% endfor %}
+			{% endblock fotosanunicos %}
+		</div>
+		</div>
+
+		<div id="itens">
+
+			<div id="itensbanner">
+				<p id="itensbannerTitle">Detalhes do produdo</p>
+
+			</div>
+
+			<div id="itensTabela" class="shadow" >
+
+				<table id="bannerTabela" border="0" style="width:300px;">
+					<thead>		
+						<tr>
+							<th class="corprincipal" colspan="2" align="center">Descrição</th>
+						</tr>
+					</thead>
+					<tbody class="anuncio">
+						<tr>
+							<td> Nave </td>
+							<td>{{ obj }}</td>
+						</tr>
+						<tr>
+						<td> Fascículo {{ Item.fasciculo.id }} </td>
+							<td>{{ Item.revista }}</td>
+						</tr>
+						<tr>
+							<td> Dimenções </td>
+							<td>{{ Item.dimecoes }}</td>
+						</tr>
+						{% if  Item.extras %}
+							<tr>
+								<td> Info Extra </td>
+								<td>{{ Item.extras }}</td>
+							</tr>
+						{% endif %}
+					</tbody>	
+				</table>
+
+			</div>
+
+				<img whidth="900" src="{% static 'img/StarWars/maxresdefault.jpg' %}">
+		</div>	
+
+		<footer id="footer" class="corprincipal">
+
+			<h1>
+				 Tire todas as dúvidas antes de comprar.
+				 </br>
+				 Todas as perguntas serão respondidas
+			</h1>
+				<!--Copyright edgarbruno.com -->
+		</footer>	
+
+	</div>
+
+{% endblock big_wrapper %}

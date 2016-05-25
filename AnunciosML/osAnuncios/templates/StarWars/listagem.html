@@ -1,0 +1,151 @@
+{% extends "default/base.html" %}
+
+{% load staticfiles %}
+
+{% load templateTagUtils %}
+
+{% block titulo %}
+	Listagem de naves cadastradas		
+{% endblock %}
+
+{% block big_wrapper %}
+
+	<div id="wrapperListagem">
+
+		<output id="modalDiv"></output>
+
+		<div id="margin_aux">
+
+			{% for obj in objRAW %}
+
+				{% if objRAW|proximoAfi:forloop.counter0 == 2 %}<!-- DIV FECHAR -->
+					</div>
+					<br />
+				{% endif %}
+
+				{% if objRAW|proximoAfi:forloop.counter0 %}<!-- DIV CRIAR -->
+					<div class="triggerTooltip slideToggle_aux" data-element="#lis_{{ forloop.counter0 }}_div">
+						<a class="cursorTool" > <!-- Cria o link e tooltip -->
+								
+							{% with objRAW|tooltipM:forloop.counter0 as objT %}
+
+								<span id="tooltipEl" class="tooltipElAux">
+									<div id="tituloTool">
+										<div id="tituloCON">
+											<p >Total de naves</p>
+										</div>
+										<div class="tituloOPC">
+											<p>{{ objT|length }}</p>
+										</div>
+									</div>
+									<div id="bTooltip" class="bTooltipMin">
+										<span id="imgTooltipAfiliContent">
+								 			<img id="imgTooltipAfili" src="{{ obj.afiliacao.fotoAF.url }}"/>
+								 		</span>
+										{% for val in objT %}
+											<span class="content-body">
+												{% for imgF in val.imagensN.all %}
+													<img class="image_tooltip" height="40" src="{{ imgF.banner.url }}"/>
+												{% endfor %}
+												<span class="content-txt">
+													{{ val }}
+												</span>
+											</span>
+										{% endfor %}
+									</div>						
+								</span>
+
+								{{ obj.afiliacao }}
+							</a>
+
+							<div id="subT"><!-- underline--></div>
+							
+							<div id="lis_{{ forloop.counter0 }}_div" style="display:none;">
+
+								<a id="lis_{{ forloop.counter0 }}" class="botao botaoDef" data-element="#{{ obj.afiliacao|espacoReplace }}" onclick="slideToggle(this)">Mostrar</a>
+
+							</div>
+						</div>
+
+						{% endwith %}
+
+							<div id="{{ obj.afiliacao|espacoReplace }}" style="display:none;">
+					
+					{% endif %}
+
+					<table id="tableDetalhe">
+					  <caption>{{ obj.afiliacao }}</caption>
+					  <thead>
+					    <tr><th colspan="4">{{ obj }}</th></tr>
+					  </thead>
+					  <tfoot>
+					    <tr><td colspan="4">
+					    	<ul id="listagem">
+					    		{% with 'editar estoque venda' as prefix %}
+									{% for var in prefix.split %}	
+										{% with URL_l=var|add:"_"|add:linkULR %}
+										<li>
+											{% if forloop.counter0 == 0 %}
+
+												<a class="botao {{ var }}" href="{% url URL_l obj.get_naveNome %}" role="button">{{ var }}</a>
+
+											{% else %}
+												<a id="{{ obj|espacoReplace }}" class="botao {{ var }}" onclick="Modal('{{ var }}', '{{ obj }}', '{% url URL_l obj|espacoReplace %}')"role="button">{{ var }}</a>
+											{% endif  %}
+										</li>
+									{% endwith %}
+								{% endfor %}
+							</ul>
+
+							{% endwith %}
+					    </td></tr>
+					  </tfoot>
+					  <tbody>
+					    <tr>
+					      <td rowspan="2">
+					      		<a href="{% url 'exibir_nave' obj.get_naveNome %}">
+					      			{% for imgF in obj.imagensN.all %}
+					      				<img title="{{ obj }}" class="image_link" border="1" height="75" src="{{ imgF.banner.url }}"/>
+					      			{% endfor %}
+					      		</a>
+					      </td>
+					      <td>Estoque</td>
+					      <td>Vendas</td>
+					      <td>Margem</td>
+					    </tr>
+					    <tr>
+					      <td> {% if obj.estoqAtual %}
+					      			{{ obj.estoqAtual }}
+					      	   {% else %}
+					      	   		-
+					      	   {% endif %}
+					      </td>
+					      <td> {% if obj.vendasTotal %}
+					      			{{ obj.vendasTotal }}
+					      	   {% else %}
+					      	   		-
+					      	   {% endif %}
+					      </td>
+					      <!-- Custom tag: retorna percentagem de lucro de cada venda -->
+					      {% with args=obj.vendasTotal|stringformat:"i"|add:" "|add:obj.valorVendasTotal %}
+					      <td>
+						      {% if obj.vendasTotal %}
+						     	 {{ obj.valorUni|margemLucro:args }}
+						      {% else %}
+						      -		 
+						      {% endif %}
+						  </td>
+					      {% endwith %}
+					    </tr>
+					  </tbody>
+					</table>
+
+					{% if forloop.last %}<!-- FECHAMENDO DA DIV DO ÚLTIMO ITEM ABERTA -->
+						</div>
+					{% endif %}
+
+			{% endfor %}
+		</div>
+	</div>
+	
+{% endblock big_wrapper %}

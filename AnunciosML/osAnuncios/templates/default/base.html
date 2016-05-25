@@ -1,0 +1,47 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="Edgar Bruno">
+		
+		<title>
+
+			{% block titulo %}			
+			{% endblock titulo %}
+
+		</title>
+
+		{% include 'head_CSS.html' %}
+
+		<style>
+	  		{% block style %} 
+
+	  		{% endblock %}
+	  	</style>
+
+	</head>
+	<body  onload="checkedCeckBox()">
+		<header id="top_header">
+			{% block top_header %}
+				<!-- Coloca-se aqui as informações / com titulo/ e pricipais-->
+				{% include 'default/navbar.html' %}
+			{% endblock top_header %}
+		</header>
+	
+		<div id="big_wrapper">
+			{% block big_wrapper %}
+				{% block mainSection %}
+				{% endblock mainSection %}
+			{% endblock big_wrapper %}
+			
+		</div>
+
+		{% include 'javaScript.html' %}
+	</body>
+
+</html>

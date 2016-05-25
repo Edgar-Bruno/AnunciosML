@@ -1,0 +1,182 @@
+{% extends "default/base.html" %}
+
+{% load staticfiles %}
+
+{% block titulo %}
+	Exibição da nave : {{ obj }}			
+{% endblock %}
+
+<style>
+{% block style %}
+/*Ainda não é a forma correta de se fazer...*/
+{{ cor }}
+
+{% endblock style %}
+</style>
+
+{% block big_wrapper %}
+
+	<div id="big_wrapperNave">
+
+		<header>
+			<div id="imagenTopH">
+				<div id="tituloHeader2" class="corprincipal">
+					<h1>NAVES E VEÍCULOS</h1>
+				</div>
+				<div id="logoPlaneta">
+					<img whidth="450" src="{% static 'img/StarWars/planeta-deagostini-g.png' %}">
+				</div>
+				<img id="imagemTopH" whidth="900" src="{% static 'img/StarWars/Star-Wars-Logo-Wallpaper2.jpg' %}">
+			</div>
+			<div id="texto">
+				<h2>Complete já sua coleção com essa bela miniatura.</h2>
+				Reproduções em chumbo das Naves e Veículos da mítica saga.
+				Uma coleção excepcional para os apreciadores desta epopeia inesquecível. Os veículos mais míticos e as naves mais emblemáticas da saga, selecionados e reunidos em uma incrível coleção para os fãs de Star Wars.
+
+				<h2>Miniaturas de qualidade excepcional!</h2>
+				As reproduções seguem fielmente os modelos originais e revelam uma atenção especial aos detalhes e à qualidade do acabamento. São autênticas joias de colecionador desenvolvidas especialmente para os fãs de Star Wars.
+				Os melhores especialistas da Lucasfilm contribuíram para a realização de cada miniatura, garantindo total fidelidade aos filmes e prestando atenção especial aos detalhes e à qualidade dos acabamentos
+					
+			</div>
+		</header>
+		<section id="mainSection">
+
+			{% block mainSection %}
+				<div id="aside_main">
+
+					<div id="poster">
+						<img class="shadow" src="{{ poster.posterIMG.url }}">
+						<div id="txtInfo">
+							Exibido:{{ poster.lancamento|date:"d/m/Y" }}.
+							{{ poster.detalhe }}
+						</div>
+					</div>
+
+					<div id="afiliacao">
+						<div id="baseInvert" class="shadow">
+							<img id="invertCor" height="175" width="205" src="{{ obj.afiliacao.fotoAF.url }}">
+						</div>
+						<div id="txtInfo">
+							Afiliação: {{ obj.afiliacao }}
+						</div>
+					</div>
+
+				</div>
+
+				<div id="banner" >
+					<div id="bannerTabela" class="shadow" >
+						<table border="0" style="width:350px;">
+							<thead>										
+								<tr>
+									<th class="corprincipal" colspan="2" align="center">Especificações da Nave</th>
+								</tr>
+							</thead>
+							<tbody class="anuncio">
+								<tr>
+									<td> Fabricante </td>
+									<td>{{ obj.fabricante.fabricante }}</td>
+								</tr>							
+								{% for desc in descricao %}
+									<tr class="{% cycle 'odd' 'even' %}">
+										<td>{{ desc.caracteristica }}</td>
+										<td>{{ desc.informacao }}</td>
+
+									</tr>
+								{% endfor %}	
+							</tbody>
+						</table>
+					</div>
+					<div id="titulobanner">
+								
+						{{ obj }}
+
+					</div>
+
+					<img class="shadow" height="615" width="536" src="{{ objNaFotos.banner.url }}">
+					
+				</div>
+
+			{% endblock mainSection %}
+
+		</section>
+
+		<section id="imgExtra">
+			
+			<div id="extraSection">
+				<img class="shadow" height="200" width="233" src="{{ objNaFotos.fotoCE.url }}">
+				<div id="txtInfo">
+					<h3>Cena</h3>
+					<p>{{ obj.poster }}</p>
+				</div>
+			</div>
+			<div id="extraSection">
+				<img class="shadow" height="200" width="231" src="{{ objNaFotos.piloto.url }}">	
+				<div id="txtInfo">
+					<h3>Piloto</h3>
+					<p>{{ obj.nomepiloto }}</p>
+				</div>
+			</div>
+			<div id="extraSection">
+				<img class="shadow" height="200" width="231" src="{{ objNaFotos.fotoMo.url }}">
+				<div id="txtInfo">
+					<h3>Modelo</h3>
+				</div>
+			</div>
+
+		</section>
+
+		<div id="aidMargin" class="corprincipal">
+			<h2>FOTOS DO MODELO</h2>
+		</div>
+
+		<div id="fotosModelo">
+				{% for imagem in fotoanuncio %}
+					<div id="fotoanuncio">
+						<img class="shadow" height="385" width="385" src="{{ imagem.fotoAN.url }}">
+					</div>
+				{% endfor %}
+		</div>
+		<div id="itens">
+
+			<div id="itensbanner">
+				<p id="itensbannerTitle">Detalhes do Modelo</p>
+			</div>
+
+			<div id="itensTabela" class="shadow" >
+
+				<table class="itensTabela" border="0" style="width:325px;">
+					<thead>		
+						<tr>
+							<th class="corprincipal" colspan="2" align="center">Descrição</th>
+						</tr>
+					</thead>
+					<tbody class="anuncio">
+						<tr>
+							<td> Nave </td>
+							<td>{{ obj }}</td>
+						</tr>
+						<tr>
+						<td> Fascículo {{ Item.fasciculo.id }} </td>
+							<td>{{ Item.revista }}</td>
+						</tr>
+						<tr>
+							<td> Dimenções </td>
+							<td>{{ Item.dimecoes }}</td>
+						</tr>
+						{% if  Item.extras %}
+							<tr>
+								<td> Info Extra </td>
+								<td>{{ Item.extras }}</td>
+							</tr>
+						{% endif %}
+					</tbody>	
+				</table>
+
+			</div>
+
+				<img whidth="900" src="{% static 'img/StarWars/maxresdefault.jpg' %}">
+		</div>	
+
+	</div>
+
+{% endblock big_wrapper %}

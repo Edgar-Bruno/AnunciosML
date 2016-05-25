@@ -1,0 +1,52 @@
+{% extends "default/base.html" %}
+
+{% load staticfiles %}
+
+{% block top_header %}
+{% endblock top_header %}
+
+{% block big_wrapper %}
+
+	<form method="{{ method }}" action="{{ action }}" enctype="multipart/form-data">
+		{% csrf_token %}
+		<table id="tableForms" cellpadding="0" cellspacing="0" width="100%" border="1">
+			<caption></caption>
+			<thead>
+			<tr><th colspan="2" rowspan="1">{{ titulo }}</th></tr>
+			</thead>
+			<tbody>
+				{% if estoque.estoqAtual > 0 %}
+					<tr>
+					    <td>Estoque atual</td>
+					    <td>{{ estoque.estoqAtual }} unidades </td>
+					</tr>
+					<tr>
+						<td>
+							<p id="erroForm">{{ vendasform.quantidadeVenda.errors.as_text }} </p>
+							{{ vendasform.quantidadeVenda.label }}
+						</td>
+						<td>{{ vendasform.quantidadeVenda }}</td>
+					</tr>
+					<tr>
+						<td>
+							<p id="erroForm">{{ vendasform.valorVenda.errors.as_text }} </p>
+							{{ vendasform.valorVenda.label }}
+						</td>
+						<td>{{ vendasform.valorVenda }}</td>
+					</tr>
+					<tr>
+						<td colspan="2" >
+							<input class="btn {{ Options }} btn-lg" type="submit" value="{{ botao }}">
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+					    <td> Sem estoque</td>
+					</tr>
+				{% endif %}
+
+			</tbody>
+		</table>
+	</form>
+	
+{% endblock %}

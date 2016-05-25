@@ -1,0 +1,271 @@
+
+h1{
+	font: 60px EA Sports Covers SC;
+	text-shadow: rgba(255,255,255,0.5) 0px 3px 3px;
+
+}
+
+h1{
+	color: white;0000
+}
+
+h2{
+	text-align: center;
+	font: 30px EA Sports Covers SC;
+	padding-left: 20px;
+	
+}
+
+h2, h3{
+	text-align: center;	
+	color: white;0000
+
+ }
+
+h3{
+	font: 30px EA Sports Covers SC;
+	text-transform: uppercase;
+	margin: -2px;
+	text-shadow: 2px 2px 1px #222;
+}
+
+.shadow{
+
+	box-shadow: 3px 3px 3px #333;
+
+}
+/* HEADER */
+#big_wrapperNave{
+	display: block;
+	position: relative;
+	text-align: center;
+	/*background: red;*/
+	background: #1d1d1d; 
+	width: 900px;
+	padding: 5px;
+	margin: 0 auto; /* centraliza div dentro da outra*/
+}
+
+#imagenTopH, #itensbanner{
+	position: relative;
+	text-align: center;/* centralizar item na vertical*/	
+}
+
+#imagemTopH{
+	width: 900px;
+}
+
+#tituloHeader2{
+	position: absolute;
+	width: 900px;
+	margin: 0 auto; /* centraliza div dentro da outra*/
+	margin-top: 400px;
+}
+
+#logoPlaneta{
+	position: absolute;
+	margin-top: 510px;
+	width: 100%; /* centralizar item na vertical*/
+}
+
+#texto{
+	background: #7c7c7c;
+	text-align: justify;
+	padding: 20px;
+	font: 20px FreeSans;
+	/*text-shadow: 2px 2px 2px #b3b3b3;*/
+	color: #181818;
+}
+/* FIM HEADER */
+/* SECTION mainSection */
+#mainSection{
+	position: relative;
+	display: block;
+	background: blue;
+}
+
+#aside_main{
+	position: relative;
+	float: left;
+	width: 270px;
+
+}
+
+#poster, #afiliacao, #banner, #extraSection, #fotoanuncio{
+	margin: 0 auto; /* centraliza div dentro da outra*/
+	display: block;
+	margin-top: 5px;
+	padding: 20px 10px 5px 10px;
+	background: #7c7c7c;
+	
+}
+
+#poster{
+	width: 277px;
+	height: 430px;
+
+}
+
+#afiliacao{
+	width: 277px;
+	height: 215px;
+
+}
+
+#baseInvert{
+	/* centraliza div dentro da outra*/
+	margin-left: auto;
+	margin-right: auto;
+	left: 0;
+	right: 0;
+	/* centraliza div dentro da outra*/
+
+	margin-bottom: 1px;
+	background: #505050;
+	border: 3px solid #2c2c2c;
+	width: 231px;
+	height: 178px;
+	text-align: center;
+}
+
+#txtInfo{
+	margin-top: 7.5px;
+	text-shadow: 1px 1px 1px #999;
+	font: 13px EA Sports Covers SC;
+}
+
+#invertCor{
+    filter: invert(100%);
+    -webkit-filter: invert(100%);
+    -moz-filter: invert(100%);
+    -o-filter: invert(100%);
+    -ms-filter: invert(100%);
+}
+
+#banner{
+	float: right;
+	height: 675px;
+	width: 577.5px;
+}
+
+#titulobanner{
+position: absolute;
+padding-left: 40px;
+width: 567.5px;
+text-align: left;
+color: red; 
+text-shadow: 3px 0px 1px #413612,
+			 3px 3px 1px #413612,
+			-3px 3px 1px #413612,
+			-3px 0px 1px #413612,
+			 0px 3px 1px #413612,
+			-3px -3px 1px #413612,
+			 3px -3px 1px #413612,
+			 5px 5px 2px black;
+font: 50px EA Sports Covers SC;
+font-weight: bold;
+color: #efe9d1;
+}
+
+#bannerTabela{
+	position: absolute;
+	margin-top: 320px; 
+	margin-left: 30px;
+}
+
+#bannerTabela table, #itensTabela table{
+	border-collapse: collapse;
+	border: 1px solid black;
+
+}
+
+
+#bannerTabela th, #bannerTabela td{
+	text-shadow: 1px 1px 1px #999;
+	font: 11px EA Sports Covers SC;
+	padding: 5px;
+	border: 2px solid gray;
+}
+
+#itensTabela th, #itensTabela td{
+	text-shadow: 1px 1px 1px #999;
+	font: 15px EA Sports Covers SC;
+	padding: 5px;
+	border: 2px solid gray;
+}
+
+#bannerTabela, .itensTabela{
+	opacity: 0.80;
+
+}
+
+tbody.anuncio tr:nth-child(odd){background-color: #d9d9d9;}
+
+tbody.anuncio tr:nth-child(even){background-color: #c7c7c7;}
+
+tbody.anuncio td:nth-child(odd){
+	text-align: right;
+	background-color: white;
+	border: none;
+}
+
+th{
+	text-transform: uppercase;
+	font-size: 115%;
+	text-align: center;
+	color: white;
+}
+/* FIM SECTION mainSection */
+/* SECTION imgExtras */
+#imgExtra{
+	position: relative;
+	display: block;
+	clear: both;
+}
+
+#extraSection{
+	display: inline-block;
+	vertical-align: top;/* alinha top*/
+	width: 276px;
+	height: 285px;
+
+}
+
+/* fim SECTION imgExtras */
+/* fotosModelo */
+#aidMargin{
+	margin-top: 5px;
+}
+
+#fotoanuncio{
+	display: inline-block;
+	width: 425px;
+	height: 425px;
+}
+/* fim fotosModelo*/
+
+
+#itens{
+	text-align: center;
+	margin-top: 5px;
+}
+
+#itensbanner{
+	text-align: right;
+	width: 90%;
+	position: absolute;
+	color: white;
+	font: 14px EA Sports Covers SC;
+	font-size: 35px;
+	text-shadow: rgba(255,255,255,0.5) 2px 3px 3px;
+}
+
+#itensTabela{
+	position: absolute;
+	margin-top: 70px; 
+	margin-left: 500px;
+}
+.itensTabela{
+
+}
+/*fim item banner*/

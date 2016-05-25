@@ -1,0 +1,116 @@
+nav#navbar{
+  top: 0px;
+  position: fixed;
+  z-index: 999;
+  font: 14px EA Sports Covers SC;
+  width: 100%;
+}
+
+nav#navbar div.container{
+
+   text-shadow: 0 1.5px 0 rgba(0,0,0,0.4);    
+   background: #0038d4; /* layer fill content */
+  -moz-box-shadow:
+    0 3px 4px rgba(7,8,11,.27) /* drop shadow */,
+    inset 0 2px 0 rgba(255,255,255,.31) /* inner shadow */,
+    inset 0 0 10px rgba(0,101,189,.27) /* inner glow */,
+    0 0 0 1px #0271ab /* outer stroke */;
+
+  -webkit-box-shadow:
+    0 3px 4px rgba(7,8,11,.27) /* drop shadow */,
+    inset 0 2px 0 rgba(255,255,255,.31) /* inner shadow */,
+    inset 0 0 10px rgba(0,101,189,.27) /* inner glow */,
+    0 0 0 1px #0271ab /* outer stroke */;
+
+  box-shadow:
+    0 3px 4px rgba(7,8,11,.27) /* drop shadow */,
+    inset 0 2px 0 rgba(255,255,255,.31) /* inner shadow */,
+    inset 0 0 10px rgba(0,101,189,.27) /* inner glow */,
+    0 0 0 1px #0271ab /* outer stroke */;
+ 
+  background-image: -moz-linear-gradient(90deg, #0064bd 0%, #009ced 100%); /* gradient fill */
+  background-image: -o-linear-gradient(90deg, #0064bd 0%, #009ced 100%); /* gradient fill */
+  background-image: -webkit-linear-gradient(90deg, #0064bd 0%, #009ced 100%); /* gradient fill */
+  background-image: linear-gradient(90deg, #0064bd 0%, #009ced 100%); /* gradient fill */
+}
+
+
+nav#navbar #ul_nivel_A > li{
+  display: inline-block;  
+}
+
+nav#navbar ul a{
+  color: #f6f6f6;
+  text-decoration: none;
+  
+}
+
+nav#navbar li{
+  text-align: center;
+}
+
+nav#navbar #ul_nivel_A .ul_nivel_B {
+  display: none;
+}
+
+nav#navbar #ul_nivel_A li:hover > .ul_nivel_B {
+  list-style-type: none;
+ /* display: block; */
+}
+
+/* cor do item hover */
+nav#navbar ul li:hover > a{
+  background: #4b545f;
+  color: white;
+}
+
+nav#navbar ul li a {
+  display: block;
+  padding: 10px;
+}
+
+/* fundo do submenu 1 */
+nav#navbar #ul_nivel_A .ul_nivel_B{
+  background: #5f6975;
+  position: absolute;
+}
+/*cor fonte submenu 1 */
+nav#navbar #ul_nivel_A .ul_nivel_B > a{
+  color: red;
+}
+#ul_nivel_A > li:not(:last-child) {
+    margin: 5px;
+    border-right: 2px solid #0f3160;    
+}
+
+
+/* SETAS*/
+
+#setaEsq:before {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  
+  width: 0; 
+  height: 0; 
+
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent; 
+  border-right: 15px solid red; 
+}
+
+
+#setaDir:before{
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  
+  width: 0; 
+  height: 0; 
+
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent; 
+  border-left: 15px solid red; 
+
+}
+/* FIM SETAS*

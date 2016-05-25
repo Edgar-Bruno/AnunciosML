@@ -1,0 +1,532 @@
+
+editarNaveView >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+def editarNaveView (request, naveNome, title):
+    
+    editNave = get_object_or_404(Nave, naveNome=naveNome.replace('_',' ').replace('--', '\''))
+
+    editItem = ItemCaracteristica.objects.get(nave_id=editNave.id)
+
+    objF = FotosAnuncio.objects.filter(nave_id=editNave.id)
+
+    objI = NaveImagens.objects.get(nave_id=editNave.id)
+
+    editProd = Produto.objects.get(id=editNave.id)
+
+    # print "Fascículo ",editItem.fasciculo.fasciculo
+    # file_data = {'image': SimpleUploadedFile('imgz', editNave.banner.read())}
+
+    InitialP = {    'id'                : editProd.id,
+                    'produzido'         : editProd.produzido.id,
+    }
+
+    Initial = {     'nave_id'           : editNave.id,
+                    'id'                : editItem.id,
+                    'dimecoes'          : editItem.dimecoes,
+                    'revista'           : editItem.revista,
+                    'fasciculo'         : editItem.fasciculo.id,
+                    'extras'            : editItem.extras
+    }
+
+    InitialIMG = {  'banner'            : objI.banner,
+                    'piloto'            : objI.piloto,
+                    'fotoMo'            : objI.fotoMo,
+                    'fotoCE'            : objI.fotoCE
+    }
+
+    # formX = NaveForms()
+    # formX.image_display = objI.banner
+
+    editFormset = DescricaoFormSet(initial=[
+                                    {'id'               :   x.id,
+                                     'caracteristica'   :   x.caracteristica_id,
+                                     'nave_id'          :   x.nave_id,
+                                     'informacao'       :   x.informacao}
+                                     for x in Descricao.objects.filter(nave_id=editNave.id)])
+
+    context = {
+            'editForms'         : NaveForms(instance=editNave),
+            'editFormsI'        : ItemCaracteristicaForms(initial=Initial),
+            'formFosTaED'       : NaveImagensForms(initial=InitialIMG),
+            'editFormPr'        : ProdutoForms(initial=InitialP),
+            'editFormset'       : editFormset,
+            'formF'             : FotosAnuncioForms(hide_condition=True),
+            'PosterForm'        : posterForms(),
+            'method'            : 'POST',
+            'botao'             : 'SalvaR',
+            'Options'           : 'btn-primary',
+            'titulo'            : title,
+            'objI'              : objI,
+            'objF'              : objF
+        }
+
+    if request.method == 'POST':
+
+        editform = NaveForms(request.POST, request.FILES, instance=editNave)
+
+        editformI = ItemCaracteristicaForms(request.POST)
+
+        editFormset = DescricaoFormSet(request.POST or None)
+
+        if editform.is_valid() and editformI.is_valid():
+
+            instance = editform.save(commit=False)
+            instance.save()
+
+            instanceI = editformI.save(commit=False)
+
+            # Verifica se o ID do ItemCaracteristica é EXISTENTE
+            #   if Initial.has_key('id'):
+            instanceI.id = Initial['id']
+            instanceI.nave_id = editNave.id
+            instanceI.save()
+
+            # !!! Nessa caso, essa solução está atentendo...
+
+            Descricao.objects.filter(nave_id=editNave.id).delete()
+            
+            for formSet in editFormset.forms:
+                if formSet.is_valid():
+                    formUP = formSet.save(commit=False)
+                    if formUP.caracteristica_id:
+                        formUP.nave_id = instance.id
+                        formUP.caracteristica
+                        formUP.save()
+                else:
+
+                    print 'invalid - Não salvo'
+
+            if request.FILES.getlist("fotoAN"):
+                # on Substitui todas as imagens
+                if request.POST.get('checkBox'):    
+                    FotosAnuncio.objects.filter(nave_id=editNave.id).delete()
+                for key in request.FILES.getlist("fotoAN"):
+                    IMX = FotosAnuncio.objects.create(nave_id=instance.id, fotoAN=key)
+            
+            return HttpResponseRedirect(reverse('nave'))
+
+        else:
+
+            print 'editform.is_valid()', editform.is_valid()
+
+    return render(request, 'edit.html', context )
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+naveView >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+            print "****************** VALORES FORMSET_IN *********************"
+            print "caracteristica      > ", item_ADD['caracteristica']
+            print "checkBox_descricao  > ", item_ADD['checkBox_descricao'] 
+            print "informacao          > ", item_ADD['informacao']
+            print "caracteristicaADD   > ", item_ADD['caracteristicaADD']
+            print formset[enu]['checkBox_descricao'].data 
+            #checkbox = "checkBox_" + fieldIN
+            print "***********************************************************"
+        """
+        formset =  DescricaoFormSet(initial=[
+                                            {'caracteristica'       : item['caracteristica'],
+                                             'checkBox_descricao'   : item['checkBox_descricao'],
+                                             'informacao'           : item['informacao'],
+                                             'caracteristicaADD'    : item['caracteristicaADD']}    
+                                             for item in formsetADD_IN
+                                            ])
+        """
+
+	objWanted = []
+	for obj in Nave.objects.all():
+		try:
+			objWanted.append(Estoque.objects.filter(produto_id=obj.id).latest('atualizEntrada'))
+		except Exception as e:
+			print "#####",e
+
+	print objWanted[0].atualizEntrada
+	print "*** >", Estoque.objects.filter(produto=Produto.objects.all(), flag=True).query
+	print "*** >", Nave.objects.filter(produto=Produto.objects.all()).query
+	print "AQui ", Tnogahist.objects.filter(dziens__in=Tdzien.objects.filter(dzienrok=1234))
+	print "*** >", Estoque.objects.filter(produto=Produto.objects.all()).query
+	print "------", Nave.objects.extra(tables=["osAnuncios_produto"])
+	 
+	 'Valores_enumetados': enumerate(Nave.objects.all().order_by('afiliacao__afiliacao', 'naveNome')),
+
+
+        if obj_afiliacao['checkBox_afiliacao'].value():
+
+            novaAfiliacao =  obj_afiliacao
+
+            valoresADD = novaAfiliacao.salveAfiliacaoADD(obj_afiliacao)
+
+            updated_data = request.POST.copy()
+            updated_data.update({'afiliacao': int(valoresADD.id)})
+
+            objNave = NaveForms(data=updated_data)
+
+            obj_afiliacao = AfiliacaoForms(data={'checkBox_afiliacao': False})
+        else:
+
+            obj_afiliacao.data['afiliacaoADD'] = ""
+            obj_afiliacao.data['fotoAF'] = True
+
+
+         """
+        editFormset = DescricaoFormSet(initial=[
+                                    {'id'               :   x.id,
+                                     'caracteristica'   :   x.caracteristica_id,
+                                     'nave_id'          :   x.nave_id,
+                                     'informacao'       :   x.informacao}
+                                     for x in Descricao.objects.filter(nave_id=editNave.id)])
+        for i, item in enumerate(formset):
+
+            print "=-=-=-=-=-=-=-=-=-=-"
+            print item['checkBox_descricao'].data
+            print item['checkBox_descricao'].value()
+
+            print item['caracteristica'].value()
+
+            print "=-=-=-=-=-=-=-=-=-=-", item['checkBox_descricao'].value()
+
+            if item['checkBox_descricao'].value() and not item['caracteristica'].value():
+                obj_caracteristica = CaracteristicaForms()
+                valoresADD = obj_caracteristica.salveValueADD(item)
+
+                formset = DescricaoFormSet(initial=[{'caracteristica'   :   int(valoresADD.id)}])
+
+                print "aqui"
+                """
+
+         """
+            for enu, i in enumerate(item_formsetADD_RAW):
+                #print "%s -- %s" % (i.field, i.value())
+                print "valoe ",formsetADD_RAW[enu]['caracteristica'].value()
+                print "valoe ",formsetADD_RAW[enu]['checkBox_descricao'].value()
+                """
+
+	           instanceNaIma = objNaveImagensPost.save(commit=False)
+
+                instanceNaIma.id = InitialIMG['id']
+                instanceNaIma.nave_id = instance.id
+
+                for imgd in objNaveImagensPost.fields:
+                    imgdi = "instanceNaIma." + imgd
+                    fieldIMG = "objNaveImagens." + imgd
+                    print "-----  imgdi    %s -- %s  " % (imgdi, eval(imgdi))
+                    print "-----  fieldIMG %s -- %s  " % (fieldIMG, eval(fieldIMG))
+
+                    if not eval(imgdi):
+                    
+                        #fieldIMG = "objNaveImagens." + imgd
+                        
+                        value = "%s = %s" % (imgdi, eval(fieldIMG))
+                        x = { 'edf' : '= Banner/07693017-photo-logo-android-lollipop_YPuWUJS.jpg'}
+                        print "!!!!!!!!!!!!!!!!!!!! ", value
+                        #instanceNaIma.banner = 'Banner/07693017-photo-logo-android-lollipop_YPuWUJS.jpg'
+                        eval('imgdi', x)
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+/*
+// slideToggle ITENS //
+$(function(){
+    $(".btn-toggle").click(function(e){
+        e.preventDefault();
+
+        // Altera Texto do link
+        //var x = $('#'+this.id).text(); -> texto do link
+
+        //var string = "foo", substring = "e";
+        //console.log(string.indexOf(substring)); -> string in texto 
+        el = $(this).data('element');
+        $(el).slideToggle();
+
+        try{
+
+            var checkBox = document.getElementById(this.id+"_checkBox").querySelectorAll("#id_checkBox");
+
+            elDefault = document.getElementById(this.id+"_default");
+
+            if (checkBox[0].checked == false){
+
+                console.log("visible");
+                checkBox[0].checked = true;
+
+            }
+            else{
+
+                console.log("hidden");
+                checkBox[0].checked = false;
+            }
+
+            $(elDefault).slideToggle();
+        
+        }
+        catch(err){
+            
+        } 
+        //.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+
+    });
+});
+*/
+
+	#print '>>>>>>>>>>>>', Descricao.objects.select_related()
+ 	"""
+	for x in Descricao.objects.select_related().filter(nave_id=checkNave.id):
+		print 'xxxxx'
+		print "-------", x.caracteristica
+		print "-------", x.informacao
+		print "-------", x.nave
+		print "-------", x.nave.banner
+		print "-------", x.nave.cores.coresNom
+
+	print checkNave.fabricante.fabricante
+	"""
+	#q1 = Product.objects.filter(product__id=product_id, distributor__name='FirstDistributor')
+	
+	#print checkNave.banner
+	#print corObj.coresHex
+
+	"""
+	if form.has_changed():
+       if not form in formset.deleted_forms:
+            # Do something with this form
+	"""
+"""
+	for i in ItemCaracteristica.objects.filter(nave_id=editNave.id):
+		print "----", x.id
+		print i.dimecoes
+		print i.revista
+		print i.numeroedi
+		print i.extras
+		print "==========", i.nave_id
+
+
+		Initial = {	'id'				: i.id,
+					'nave_id'			: editNave.id,
+					'dimecoes'			: i.dimecoes,
+					'revista'			: i.revista,
+				    'numeroedi'			: i.numeroedi,
+					'extras'			: i.extras}
+
+
+	#print "Initial", Initial['id']
+
+
+	editFormsI = ItemCaracteristicaForms(initial=[
+									{'id'				: i.id,	
+									 'dimecoes'			: i.dimecoes,
+									 'revista'			: i.revista,
+									 'numeroedi'		: i.numeroedi,
+									 'extras'			: i.extras}									 
+									for i in ItemCaracteristica.objects.filter(nave_id=editNave.id)])
+	"""
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+estoqueView >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+	"""
+	if request.method == 'POST':
+
+		objAfi = AfiliacaoForms(request.POST or None, request.FILES)
+
+		#print '--------', Afiliacao.objects.all()
+
+		if objAfi.is_valid():
+			instance = objAfi.save(commit=False)
+			instance.save()
+
+			del context['form']
+			context['img'] = Afiliacao.objects.filter(id=instance.id)
+			context['method'] = 'GET'
+			context['botao'] = 'Voltar'
+			context['Options'] = 'btn-info'
+		else:
+
+			context['form'] = objAfi
+	"""
+
+		#Uma forma de se pegar o último item da lista
+		#print "---------------",Estoque.objects.filter(nave_id=objNave.id).order_by('-atualizEntrada')[0]
+
+		#Forma mais elegante earliest('field_name') ou latest('field_name')
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+HTML >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+<table cellpadding="0" cellspacing="0" width="100%" border="1">
+    <tr>
+        <td rowspan="2" colspan="3">{{ form.naveNome.label }}</td>
+        <td colspan="2">BOOKING NUMBER</td>
+    </tr>
+    <tr>
+        <td colspan="2">EXPORTER REFERENCES</td>
+    </tr>
+    <tr>
+        <td rowspan="2" colspan="3">CONSIGNEE
+            <br />Abdullah & Nasir used cars TR. LLC
+            <br />Industrial Area Nr.4
+            <br />Sharjah, P.O.Box 37858
+            <br />U.A.E
+            <br />TEL: +971 55 201 0332
+            <br />FAX: abdullah_ahmed786@yahoo.com</td>
+        <td colspan="2">FORWARDING AGENT - REFERENCES
+            <br />
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">POINT AND COUNTRY OF ORIGIN
+            <br />U.S.A</td>
+    </tr>
+    <tr>
+        <td colspan="3">Notify Party
+            <br />GAGEXPRESS LTD
+            <br />Giorgi saakadze decent #6
+            <br />Tbillsi
+            <br />Geogia
+            <br />TEL: 579897700
+            <br />
+        </td>
+        <td colspan="2" rowspan="2">DOMESTIC ROUTING INSTRUCTIONS</td>
+    </tr>
+    <tr>
+        <td colspan="3">PIER OR AIRPORT</td>
+    </tr>
+    <tr>
+        <td colspan="2">EXPORTING CARRIER
+            <br />NYK CONSTELLATION</td>
+        <td>PORT OF LOADING
+            <br />CA</td>
+        <td colspan="2">ONWARD INLAND ROUTING</td>
+    </tr>
+    <tr>
+        <td colspan="2">AIR/SEA PORT OF DISCHARGE
+            <br />Jebel Ali, U.A.E</td>
+        <td>VOYAGE NO.
+            <br />042</td>
+        <td colspan="2">Sailing Date
+            <br />2015-02-22</td>
+    </tr>
+    <tr>
+        <td colspan="5" align="center">PARTICULARS FURNISHED BY SHIPPER</td>
+    </tr>
+    <tr>
+        <td>MARKS AND NUMBERS
+            <br />APHU7031756
+            <br />SEAL #7968303
+            <br />Container size - 40HC</td>
+        <td>#OF
+            <br/>UNITS</td>
+        <td>DESCRIPTION OF PACKAGES AND GOODS</td>
+        <td>GROSS
+            <br/>WEIGHT</td>
+        <td>MEASUREMENT</td>
+    </tr>
+    <tr>
+        <td>APHU7031756
+            <br/>SEAL
+            <br/>Container size
+            <br/>
+        </td>
+        <td rowspan="4">4</td>
+        <td>2012 NISSAN VERSA
+        <br/>2012 TOYOTA CAMRY
+            <br/>2014 TOYOTA CAMRY
+            <br/>2014 KIA CAMRY
+        </td>
+        <td>1237 Kg
+        <br/>1295 Kg
+            <br/>1295 Kg
+            <br/>1295 Kg
+        </td>
+        <td>$2799
+        <br/>$1114
+          <br/>  $1114
+          <br/>  $1114
+        </td>
+    </tr>
+    
+</table>
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+JavaScript >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+/*
+// slideToggle ITENS //
+$(function(){
+    $(".btn-toggle").click(function(e){
+        e.preventDefault();
+
+        // Altera Texto do link
+        //var x = $('#'+this.id).text(); -> texto do link
+
+        //var string = "foo", substring = "e";
+        //console.log(string.indexOf(substring)); -> string in texto 
+        el = $(this).data('element');
+        $(el).slideToggle();
+
+        try{
+
+            var checkBox = document.getElementById(this.id+"_checkBox").querySelectorAll("#id_checkBox");
+
+            elDefault = document.getElementById(this.id+"_default");
+
+            if (checkBox[0].checked == false){
+
+                console.log("visible");
+                checkBox[0].checked = true;
+
+            }
+            else{
+
+                console.log("hidden");
+                checkBox[0].checked = false;
+            }
+
+            $(elDefault).slideToggle();
+        
+        }
+        catch(err){
+            
+        } 
+        //.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+
+    });
+});
+*/
+
+
+/*
+function slideToggle_aux(el){
+
+elST = $(el).data('element');
+
+var str = elST.toString();
+var r = str.replace(/#/i, "");
+
+var nextDiv = null;
+var nextDivDisplay = false;
+
+try{
+    /* pega o próximo elemento */
+    nextDiv = document.getElementById(r).parentNode.nextElementSibling;
+
+    if(nextDiv.style.display != 'none'){
+       console.log("block");
+       nextDivDisplay = true;
+      $(elST).slideDown("slow");
+
+    }
+
+$(el).hover(function(){
+
+                console.log("AQUII")
+                $(this).css("background-color", "yellow");
+                $(elST).slideDown("slow");
+
+                }, function(){
+                $(this).css("background-color", "pink");             
+                $(elST).slideUp("slow");
+
+});
+
+}
+catch(err){
+    console.log("el "+ err + "--- "+el.id);
+}
+
+
+}
+*/

@@ -1,0 +1,459 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% load templateTagUtils %}
+
+{% block big_wrapper %}
+
+	<div class="row">
+
+	<div class="col-md-6 col-sm-offset-2">
+
+			<form method="{{ method }}" action="{{ action }}" enctype="multipart/form-data"> {% csrf_token %}
+				<table id="tableForms" cellpadding="0" cellspacing="0" width="100%" border="1">
+					<caption></caption>
+					<thead>
+			    		<tr><th colspan="6" rowspan="1">{{ titulo }}</th></tr>
+			    	</thead>
+			    	<tbody>
+			    		<tr>
+			    			<td colspan="3">{{ editForms.naveNome.label }}</td>
+			    			<td colspan="3" rowspan="19" class="tbCentrelizaDIV" >
+			    				<div class="areaDiv" id="{{ formFosTaED.banner.auto_id }}_DIV">
+			    					{{ formFosTaED.banner }}
+			    					<div class="inserirTXT">
+
+			    						<img id="{{ formFosTaED.banner.auto_id }}_IMG" class="thumb" src="{{ objI.banner.url }}">				
+   									</div>
+			    				</div>	
+			    				<br />{{ formFosTaED.banner.label }}
+			    			</td>
+			    		</tr>
+						<tr>
+			    			<td colspan="3">
+			    				<p id="erroForm">{{ editForms.naveNome.errors.as_text }}</p>
+			    				{{ editForms.naveNome }}
+			    			</td>
+			    		</tr>
+			    		<tr>
+			    			<td colspan="3">{{ editFormPr.produzido.label }}</td>
+			    		</tr>
+			    		<tr>
+			    			<td colspan="3">{{ editFormPr.produzido }}</td>
+			    		</tr>
+			    		<tr>
+			    			<td colspan="3">
+			    				<a id="{{ editForms.poster.auto_id }}btn" class="trigger linkADD" href="#" data-element="#{{ editForms.poster.auto_id }}" onclick="slideToggle(this)">{{ editForms.poster.label }}
+				    				<span class="content">
+
+										<span class="content-title">
+											<span id="{{ editForms.poster.auto_id }}btn_checkBox" title="Confirme a adição" class="content-title-qtd">
+												<p id="checkBoxEl">{{ PosterForm.checkBox_poster }}</p>
+											</span>
+											Adicione um novo Poster
+										</span>
+										<span class="content-body">
+											adcione um poster ainda não cadastrado
+										</span> 	
+									</span>
+			    				</a>
+			    			</td>
+			    		</tr>
+			    		<tr>
+			    			<td colspan="3">
+			    				<div id="{{ editForms.poster.auto_id }}" class="add_item" style="display:none;">
+									<table id="tableForms" cellpadding="0" cellspacing="0" width="100%" border="1">
+										<thead>
+			    							<tr><th colspan="2">Insira um novo Poster</th></tr>
+			    						</thead>
+										<tbody>
+											<tr>
+												<td colspan="1" rowspan="2" class="tbCentrelizaDIV" valign="top">
+													<div class="areaDiv" id="{{ PosterForm.posterIMG.auto_id }}_DIV">
+			    										{{ PosterForm.posterIMG }}
+			    										<div class="inserirTXT">
+				    										<p id="{{ PosterForm.posterIMG.auto_id }}_LAB" >Insera uma imagem para o poster
+				    											<p id="erroForm">{{ PosterForm.posterIMG.errors.as_text }}</p>
+				    										</p>
+				    										<img id="{{ PosterForm.posterIMG.auto_id }}_IMG" class="thumb" src="" style="visibility:hidden">				
+   														</div>
+			    									</div>
+												</td>
+											<tr>
+												<td colspan="2">
+													<p>{{ PosterForm.subtitulos.label }}</p>
+													<p id="erroForm">{{ PosterForm.subtitulos.errors.as_text }}</p>
+													<p>{{ PosterForm.subtitulos }}</p>
+													
+													<p> {{ PosterForm.lancamento.label }}</p>
+													<p id="erroForm">{{ PosterForm.lancamento.errors.as_text }}</p>
+													{{ PosterForm.lancamento }}
+												</td>
+											</tr>
+											<tr>
+												<td colspan="2">
+													{{ PosterForm.detalhe.label }}
+													<p id="erroForm">{{ PosterForm.detalhe.errors.as_text }}</p>
+													{{ PosterForm.detalhe }}
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+
+								<div id="{{ editForms.poster.auto_id }}btn_default" >
+									<p id="erroForm">{{ editForms.poster.errors.as_text }} </p>
+									{{ editForms.poster }}
+								</div>
+			    			</td>
+			    		</tr>
+			    		<tr>
+			    			<td colspan="3">
+			    				<a id="{{ editForms.afiliacao.auto_id }}btn" class="trigger linkADD" href="#" data-element="#{{ editForms.afiliacao.auto_id }}" onclick="slideToggle(this)">{{ editForms.afiliacao.label }}
+				    				<span class="content">
+
+										<span class="content-title">
+											<span id="{{ editForms.afiliacao.auto_id }}btn_checkBox" title="Confirme a adição" class="content-title-qtd">
+												<p id="checkBoxEl">{{ AfiliacaoForm.checkBox_afiliacao }}</p>
+											</span>
+											Adicione uma nova Afiliação
+										</span>
+										<span class="content-body">
+											adcione uma afiliação ainda não cadastrada
+										</span> 	
+									</span>
+			    				</a>
+			    			</td>
+			    		</tr>
+			    		<tr>
+			    			<td colspan="3">
+
+			    				<div id="{{ editForms.afiliacao.auto_id }}" class="add_item" style="display:none;">
+
+									<table id="tableForms" cellpadding="0" cellspacing="0" width="100%" border="1">
+										<thead>
+			    							<tr><th>Insira uma nova Afiliação</th></tr>
+			    						</thead>
+										<tbody>
+											<tr>
+												<td class="tbCentrelizaDIV" valign="top">
+													<div class="areaDiv" id="{{ AfiliacaoForm.fotoAF.auto_id }}_DIV">
+			    										{{ AfiliacaoForm.fotoAF }}
+			    										<div class="inserirTXT">
+				    										<p id="{{ AfiliacaoForm.fotoAF.auto_id }}_LAB" >Insera uma imagem para a afiliação
+				    											<p id="erroForm">{{ AfiliacaoForm.fotoAF.errors.as_text }} </p>
+				    										</p>
+				    										<img id="{{ AfiliacaoForm.fotoAF.auto_id }}_IMG" class="thumb" src="" style="visibility:hidden">				
+   														</div>
+			    									</div>
+			    									<br />{{ AfiliacaoForm.afiliacao.label }}
+			    									<p id="erroForm">{{ AfiliacaoForm.afiliacaoADD.errors.as_text }} </p>
+				    								<p >{{ AfiliacaoForm.afiliacaoADD }}</p>
+												</td>
+											</tr>
+
+										</tbody>
+									</table>
+
+								</div>
+
+								<div id="{{ editForms.afiliacao.auto_id }}btn_default" >
+									<p id="erroForm">{{ editForms.afiliacao.errors.as_text }} </p>
+									{{ editForms.afiliacao }}
+								</div>
+											
+			    			</td>
+			    		</tr>
+			    		<tr>
+			    			<td colspan="3">
+			    				<a id="{{ editForms.cores.auto_id }}btn" class="trigger linkADD" href="#" data-element="#{{ editForms.cores.auto_id }}" onclick="slideToggle(this)">{{ editForms.cores.label }}
+				    				<span class="content">
+
+										<span class="content-title">
+											<span id="{{ editForms.cores.auto_id }}btn_checkBox" title="Confirme a adição" class="content-title-qtd">
+												<p id="checkBoxEl">{{ CoresForm.checkBox_cores }}</p>
+											</span>
+											Adicione uma nova cor
+										</span>
+										<span class="content-body">
+											adcione uma cor ainda não cadastrada
+										</span> 	
+									</span>
+			    				</a>
+
+			    			</td>
+			    		</tr>
+			    		<tr>
+			    			<td colspan="3">
+
+			    				<div id="{{ editForms.cores.auto_id }}" class="add_item" style="display:none;">
+
+									<table id="tableForms" cellpadding="0" cellspacing="0" width="100%" border="1">
+										<thead>
+			    							<tr><th>Insira uma nova Cor</th></tr>
+			    						</thead>
+										<tbody>
+											<tr>
+												<td class="tbCentrelizaDIV" valign="top">
+				    								<p>	{{ CoresForm.coresNom.label }} </p>
+			    									<p id="erroForm">{{ CoresForm.coresNom.errors.as_text }} </p>
+				    								<p title="{{ CoresForm.coresHex.label }}">{{ CoresForm.coresHex }} {{ CoresForm.coresNom }}</p>
+												</td>
+											</tr>
+
+										</tbody>
+									</table>
+
+								</div>
+
+								<div id="{{ editForms.cores.auto_id }}btn_default" >
+									<p id="erroForm">{{ editForms.cores.errors.as_text }} </p>
+									{{ editForms.cores }}
+								</div>
+
+			    			</td>
+			    		</tr>
+			    		<tr>
+			    			<th colspan="3" rowspan="1">Caracteristica do item</th>
+			    		</tr>
+			    		<tr>
+			    			<td colspan="3">{{ editFormsI.dimecoes.label }}</td>
+			    		</tr>
+			    		<tr>
+			    			<td colspan="3">{{ editFormsI.dimecoes }}</td>
+			    		</tr>
+			    		<tr>
+			    			<td colspan="3">{{ editFormsI.revista.label }}</td>
+			    		</tr>
+			    		<tr>
+			    			<td colspan="3">{{ editFormsI.revista }}</td>
+			    		</tr>
+			    		<tr>
+			    			<td colspan="3">{{ editFormsI.fasciculo.label }}</td>
+			    		</tr>
+			    		<tr>
+			    			<td colspan="3">{{ editFormsI.fasciculo }}</td>
+			    		</tr>
+			    		<tr>
+			    			<td colspan="3">{{ editFormsI.extras.label }}</td>
+			    		</tr>
+			    		<tr>
+			    			<td colspan="3">{{ editFormsI.extras }}</td>
+			    		</tr>
+			    		<tr>
+			    			<th colspan="6" rowspan="1">Imagens extras</th>
+			    		</tr>
+			    		<tr>
+			    			<td colspan="2" class="tbCentrelizaDIV" valign="top">
+			    				<div class="areaDiv" id="{{ formFosTaED.fotoCE.auto_id }}_DIV">
+			    					{{ formFosTaED.fotoCE }}
+			    					<div class="inserirTXT">	
+
+			    						<img id="{{ formFosTaED.fotoCE.auto_id }}_IMG" class="thumb" src="{{ objI.fotoCE.url }}">				
+   									</div>
+			    				</div>	
+			    				<br />{{ formFosTaED.fotoCE.label }}		    			
+			    			</td>
+			    			<td colspan="2"  class="tbCentrelizaDIV" valign="top">
+			    				<div class="areaDiv" id="{{ formFosTaED.piloto.auto_id }}_DIV">
+			    					{{ formFosTaED.piloto }}
+			    					<div class="inserirTXT" >
+			    							<p id="erroForm">{{ formFosTaED.piloto.errors.as_text }} </p>
+			    						
+			    						<img id="{{ formFosTaED.piloto.auto_id }}_IMG" class="thumb" src="{{ objI.piloto.url }}">			
+   									</div>
+			    				</div>
+				    			<br />{{ editForms.nomepiloto.label }}
+				    			<p>{{ editForms.nomepiloto }}</p>
+			    			</td>
+			    			<td colspan="2" class="tbCentrelizaDIV" valign="top">
+			    				<div class="areaDiv" id="{{ formFosTaED.fotoMo.auto_id }}_DIV">
+			    					{{ formFosTaED.fotoMo }}
+			    					<div class="inserirTXT">
+			    						
+			    						<img id="{{ formFosTaED.fotoMo.auto_id }}_IMG" class="thumb" src="{{ objI.fotoMo.url }}">					
+   									</div>
+			    				</div>
+			    				<br />{{ formFosTaED.fotoMo.label }}	
+			    			</td>
+			    		</tr>
+			    		<tr>
+			    			<th colspan="6" rowspan="1">Fotos do produto anunciado</th>
+			    		</tr>
+			    		<tr>
+			    			<td colspan="6" class="tbCentrelizaDIV" valign="center">
+
+
+			    				<div class="areaDiv" id="{{ formF.fotoAN.auto_id }}_DIV">
+			    					{{ formF.fotoAN }}
+			    					<div class="inserirTXT">
+			    						<p id="{{ formF.fotoAN.auto_id }}_LAB" >Insera as fotos do anúncio</p>
+			    						<img id="{{ formF.fotoAN.auto_id }}_IMG" class="thumb" src="" style="visibility:hidden">				
+   									</div>
+			    				</div>
+
+			    					<output id="list"></output>
+			    			</td>
+			    		</tr>
+			    		<tr>
+			    			<th colspan="6" rowspan="1">Caracteristicas e informações da nave</th>
+			    		</tr>
+			    		<tr>
+			    			<td colspan="3" rowspan="1">
+			    				<a id="{{ form.fabricante.auto_id }}btn" class="trigger linkADD" href="#" data-element="#{{ form.fabricante.auto_id }}" onclick="slideToggle(this)">{{ form.fabricante.label }}
+				    				<span class="content">
+
+										<span class="content-title">
+											<span id="{{ form.fabricante.auto_id }}btn_checkBox" title="Confirme a adição" class="content-title-qtd">
+												<p id="checkBoxEl">{{ FabricanteForm.checkBox_fabricante }}</p>
+											</span>
+											Adicione um novo fabricante
+										</span>
+										<span class="content-body">
+											adcione um fabricante ainda não cadastrado
+										</span> 	
+									</span>
+			    				</a>
+
+			    			</td>
+			    			<td colspan="3" rowspan="1">
+			    				<div id="{{ form.fabricante.auto_id }}" class="add_item" style="display:none;">
+
+									<table id="tableForms" cellpadding="0" cellspacing="0" width="100%" border="1">
+										<thead>
+			    							<tr><th>Insira um novo Fabricante</th></tr>
+			    						</thead>
+										<tbody>
+											<tr>
+												<td class="tbCentrelizaDIV" valign="top">
+			    									<p id="erroForm">{{ FabricanteForm.fabricanteADD.errors.as_text }} </p>
+			    									<p>{{ FabricanteForm.fabricante.label }}  {{ FabricanteForm.fabricanteADD }} </p>
+												</td>
+											</tr>
+
+										</tbody>
+									</table>
+
+								</div>
+
+								<div id="{{ form.fabricante.auto_id }}btn_default" >
+									<p id="erroForm">{{ form.fabricante.errors.as_text }} </p>
+									{{ form.fabricante }}
+								</div>
+
+			    			</td>
+			    		</tr>
+			    		<!-- SOLUÇÃO ENCOTRADA EM
+			    		https://djangosnippets.org/snippets/1246/
+			    		-->
+			    		{% for f in editFormsI.management_form %}
+			    			{{ f }}
+			    		{% endfor %}
+
+			    		{% for f in editFormsI.forms %}
+			    			
+				    		<tr class="item">
+				    			{% for field in f %}
+
+				    				{% if forloop.counter0 == 0 %}
+
+						    			<td  colspan="3">
+				    				
+				    				{% endif %}
+				    				
+						    		{% if field.name == 'informacao' %}
+						    			</td>
+						    			<td  colspan="3">
+						    				{{ field.label_tag }}<br/>
+						    				{{ field }}
+						    		{% endif %}
+
+						    		{% if field.name == 'caracteristica' %}
+
+								    	<a id="{{ field.auto_id }}btn" class="trigger linkADD" href="#" data-element="#{{ field.auto_id }}" onclick="slideToggle(this)">{{ field.label }}
+						    				<span class="content">
+
+												<span class="content-title">
+													<span id="{{ field.auto_id }}btn_checkBox" title="Confirme a adição" class="content-title-qtd">
+														<p id="checkBoxEl">
+											    			{% with f|fieldCAT:'checkBox_descricao' as fieldCAT %}
+											    		
+											    				{{ fieldCAT }}
+											    			
+											    			{% endwith %}
+														</p>
+													</span>
+													
+													Adicione uma nova Caracteristica
+
+												</span>
+												<span class="content-body">
+													adcione uma caracteristica ainda não cadastrada
+												</span> 	
+											</span>
+					    				</a>
+
+					    				<br />
+					    				<div id="{{ field.auto_id }}" class="add_item" style="display:none;">
+
+											<table id="tableForms" cellpadding="0" cellspacing="0" width="100%" border="1">
+												<thead>
+					    							<tr><th>Insira uma nova Caracteristica</th></tr>
+					    						</thead>
+												<tbody>
+													<tr>
+														<td class="tbCentrelizaDIV" valign="top">
+					    									<p id="erroForm">{{ field.errors.as_text }} </p>
+					    									<p>{{ field.label }}
+						    									{% with f|fieldCAT:'caracteristicaADD' as fieldCAT %}
+												    		
+												    				{{ fieldCAT }}
+												    			
+												    			{% endwith %}
+					    									</p>
+														</td>
+													</tr>
+
+												</tbody>
+											</table>
+
+										</div>
+
+										<div id="{{ field.auto_id }}btn_default" >
+											<p id="erroForm">{{ field.errors.as_text }} </p>
+											{{ field }}
+										</div>
+
+											<p style="visibility:hidden">
+												<a id="remove" class="delete" href="#">Delete</a>
+											</p>
+
+						    		{% endif %}
+	
+				    			{% endfor %}
+				    			</td>
+				    		</tr>
+				    		<tr>				    		
+				    			<td colspan="6">
+				    				<p><a id="add" href="#">Add detalhe</a></p>
+				    			</td>
+
+				    		</tr>
+				    			
+				    	{% endfor %}
+		
+			    	</tbody>
+		
+				</table>
+
+				<hr>
+
+				<br />
+				<input class="btn {{ Options }} btn-lg col-md-4 col-md-offset-3" type="submit" value="{{ botao }}">
+
+			</form>
+
+		</div>
+	</div>
+{% endblock big_wrapper %}

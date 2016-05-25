@@ -1,0 +1,241 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% load crispy_forms_tags %}
+
+{% block big_wrapper %}
+
+<div class="row">
+	<div class="col-md-6 col-sm-offset-2">
+
+		<h1 class="col-sm-offset-3 lead_Custon"> {{ titulo }} <br/> {{ navenome }}</h1>  <br/>
+
+		<form method="{{ method }}" action="{{ action }}" enctype="multipart/form-data"> {% csrf_token %}
+				<table id="tableForms" cellpadding="0" cellspacing="0" width="100%" border="1">
+					<caption></caption>
+					<thead>
+			    		<tr><th colspan="6" rowspan="1">{{ titulo }}</th></tr>
+			    	</thead>
+			    	<tbody>
+			    		<tr>
+			    			<td colspan="3">{{ editForms.naveNome.label }}
+			    			{{ editForms.naveNome.errors.as_text }}
+			    			</td>
+			    			<td colspan="3" rowspan="19" class="tbCentrelizaDIV" >
+			    				<div class="areaDiv" id="{{ editForms.banner.auto_id }}_DIV">
+			    					{{ editForms.banner }}
+			    					<div class="inserirTXT">
+			    						<img src="{{ objI.banner.url }}" id="{{ editForms.banner.auto_id }}_IMG" class="thumb thumbOpac">				
+   									</div>
+			    				</div>	
+			    				<br />{{ editForms.banner.label }}
+			    			</td>
+			    		</tr>
+						<tr>
+			    			<td colspan="3">{{ editForms.naveNome }}</td>
+			    		</tr>
+			    		<tr>
+			    			<td colspan="3">{{ editFormPr.produzido.label }}</td>
+			    		</tr>
+			    		<tr>
+			    			<td colspan="3">{{ editFormPr.produzido }}</td>
+			    		</tr>
+			    		<tr>
+			    			<td colspan="3">{{ editForms.poster.label }}</td>
+			    		</tr>
+			    		<tr>
+			    			<td colspan="3">{{ editForms.poster }}</td>
+			    		</tr>
+			    		<tr>
+			    			<td colspan="3">{{ editForms.afiliacao.label }}</td>
+			    		</tr>
+			    		<tr>
+			    			<td colspan="3">{{ editForms.afiliacao }}</td>
+			    		</tr>
+			    		<tr>
+			    			<td colspan="3">{{ editForms.cores.label }}</td>
+			    		</tr>
+			    		<tr>
+			    			<td colspan="3">{{ editForms.cores }}</td>
+			    		</tr>
+			    		<tr>
+			    			<th colspan="3" rowspan="1">Caracteristica do item</th>
+			    		</tr>
+			    		<tr>
+			    			<td colspan="3">{{ editFormsI.dimecoes.label }}</td>
+			    		</tr>
+			    		<tr>
+			    			<td colspan="3">{{ editFormsI.dimecoes }}</td>
+			    		</tr>
+			    		<tr>
+			    			<td colspan="3">{{ editFormsI.revista.label }}</td>
+			    		</tr>
+			    		<tr>
+			    			<td colspan="3">{{ editFormsI.revista }}</td>
+			    		</tr>
+			    		<tr>
+			    			<td colspan="3">{{ editFormsI.fasciculo.label }}</td>
+			    		</tr>
+			    		<tr>
+			    			<td colspan="3">{{ editFormsI.fasciculo }}</td>
+			    		</tr>
+			    		<tr>
+			    			<td colspan="3">{{ editFormsI.extras.label }}</td>
+			    		</tr>
+			    		<tr>
+			    			<td colspan="3">{{ editFormsI.extras }}</td>
+			    		</tr>
+			    		<tr>
+			    			<th colspan="6" rowspan="1">Imagens extras</th>
+			    		</tr>
+			    		<tr>
+			    			<td colspan="2" class="tbCentrelizaDIV" valign="top">
+			    				<div class="areaDiv" id="{{ editForms.fotoCE.auto_id }}_DIV">
+			    					{{ editForms.fotoCE }}
+			    					<div class="inserirTXT">
+			    						<img id="{{ editForms.fotoCE.auto_id }}_IMG" class="thumb thumbOpac" src="{{ objI.fotoCE.url }}">				
+   									</div>
+			    				</div>	
+			    				<br />{{ editForms.fotoCE.label }}		    			
+			    			</td>
+			    			<td colspan="2"  class="tbCentrelizaDIV" valign="top">
+			    				<div class="areaDiv" id="{{ editForms.piloto.auto_id }}_DIV">
+			    					{{ editForms.piloto }}
+			    					<div class="inserirTXT" >
+			    						<img id="{{ editForms.piloto.auto_id }}_IMG" class="thumb thumbOpac" src="{{ objI.piloto.url }}">			
+   									</div>
+			    				</div>
+				    			<br />{{ editForms.nomepiloto.label }}
+				    			<p>{{ editForms.nomepiloto }}</p>
+			    			</td>
+			    			<td colspan="2" class="tbCentrelizaDIV" valign="top">
+			    				<div class="areaDiv" id="{{ editForms.fotoMo.auto_id }}_DIV">
+			    					{{ editForms.fotoMo }}
+			    					<div class="inserirTXT">
+			    						<img id="{{ editForms.fotoMo.auto_id }}_IMG" class="thumb thumbOpac" src="{{ objI.fotoMo.url }}">				
+   									</div>
+			    				</div>
+			    				<br />{{ editForms.fotoMo.label }}	
+			    			</td>
+			    		</tr>
+			    		<tr>
+			    			<th colspan="6" rowspan="1">Fotos do produto anunciado</th>
+			    		</tr>
+			    		<tr>
+			    			<td colspan="6" class="tbCentrelizaDIV" valign="center">
+
+
+			    				<div class="areaDiv" id="{{ formF.fotoAN.auto_id }}_DIV">
+			    					{{ formF.fotoAN }}
+			    					<div class="inserirTXT">
+			    						<p id="{{ formF.fotoAN.auto_id }}_LAB" >Insera as fotos do anúncio</p>
+			    						<img id="{{ formF.fotoAN.auto_id }}_IMG" class="thumb" src="" style="visibility:hidden">				
+   									</div>
+			    				</div>
+			    					<p>{{ formF.checkBox }} {{ formF.checkBox.label }}</p>
+
+			    					{% for img in objF %}
+			    						<img class="thumbF thumbOpac" title="{{ img.fotoAN }}" src="{{ img.fotoAN.url }}" >
+			    					{% endfor %}
+			    					<hr>
+			    					<output id="list"></output>
+			    			</td>
+			    		</tr>
+			    		<tr>
+			    			<th colspan="6" rowspan="1">Caracteristicas e informações da nave</th>
+			    		</tr>
+			    		<tr>
+			    			<td colspan="3" rowspan="1">{{ editForms.fabricante.label }}
+			    			{{ editForms.fabricante.errors.as_text }}</td>
+			    			<td colspan="3" rowspan="1">{{ editForms.fabricante }}</td>
+			    		</tr>
+			    		<!-- SOLUÇÃO ENCOTRADA EM
+			    		https://djangosnippets.org/snippets/1246/
+			    		-->
+		    		{% for f in editFormset.management_form %}
+			    			{{ f }}
+			    		{% endfor %}
+
+			    		{% for f in editFormset.forms %}
+			    			
+				    		<tr class="item">
+				    			{% for field in f %}
+				    				
+						    			<td  colspan="3">
+						    		
+						    				{{ field.label_tag }}<br/>
+						    				{{ field }}
+
+						    				{% if field.label == 'Caracteristica' %}
+						    					<p><a id="remove" class="delete" href="#">Delete</a></p>
+						    				{% endif %}
+						    
+						    			</td>
+					    			
+				    	{% endfor %}
+				    		</tr>
+				    	{% endfor %}
+				    		<tr>				    		
+				    			<td colspan="6">
+				    				<p><a id="add" href="#">Add detalhe</a></p>
+				    			</td>
+
+				    		</tr>
+				    			
+				   
+				    		
+
+<!--
+    {{ formset.management_form }}
+    {% for form in formset.forms %}
+    <div class="item">
+      {{ form.as_p }}
+      <p style=""><a class="delete" href="#">Delete</a></p>
+    </div>
+    {% endfor %}
+-->
+		
+			    	</tbody>
+		
+				</table>
+
+	<hr>
+
+	<br />
+	<input class="btn {{ Options }} btn-lg col-md-4 col-md-offset-3" type="submit" value="{{ botao }}">
+
+			</form>
+	<!--
+		<form method="{{ method }}" action="{{ action }}" enctype="multipart/form-data"> 
+			{% csrf_token %}
+
+			{{ editForms.as_p }}
+			<hr>
+			{{ editFormsI.as_p }}
+			<hr>
+			{{ formF.as_p }}
+			<hr>
+
+    {{ editFormset.management_form }}
+    {% for form in editFormset.forms %}
+    <div class="item">
+   	  {{ form.caracteristica.auto_id }}
+      {{ form.nave_id }}
+      {{ form.informacao.auto_id }}
+      <p style=""><a class="delete" href="#">Delete</a></p>
+    </div>
+    {% endfor %}
+    <p><a id="add" href="#">Add detalhe</a></p>
+    
+	<ul class="col-xs-6 col-sm-4">		
+			<li><input class="btn {{ Options }} btn-lg" type="submit" value="{{ botao }}"></li>
+			<li><a class="btn btn-default btn-lg" href="{% url 'nave' %}" role="button" title="Retornar a nave">VOLTAR</a></li>
+		</ul>
+	</form>
+
+-->
+	</div>
+</div>
+
+{% endblock %}

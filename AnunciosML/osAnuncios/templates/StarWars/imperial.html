@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block faixaCentral %}
+{% endblock faixaCentral %}		
+
+{% block top_header%}
+<!-- Coloca-se aqui as informações / com titulo/ e pricipais-->
+<h1 class='elegantshadow'>Tie-Interceptor</h1>
+
+{% endblock top_header%}
+
+{% block top_menu %}
+<!-- Coloca-se o menu nesse bloco -->
+<img width="350" src="{% static 'img/StarWars/starwars_7VcdRLf.jpg' %}">
+<h2>Naves e veículos</h2>
+{% endblock top_menu %}
+
+{% block article %}
+	<!-- Coloca-se as informações do artigo aqui -->
+					<article>
+
+						<header>
+								<h1>Titulo do Artigo</h1>
+								<h2> Subtitulo do Artigo</h2>
+						</header>
+						<img width="500" src="{% static 'img/StarWars/DSC01317-b.JPG' %}">
+						<p>Esse é o melhor artigo segundo</p>
+
+						<footer>
+						<p> Escrito também por Edgar Bruno</p>
+						</footer>		
+					</article>
+										<article>
+
+						<header>
+						<hgroup>
+								<h1>Titulo do Artigo</h1>
+								<h2> Subtitulo do Artigo</h2>
+							</hgroup>
+						</header>
+
+						<p>Esse é o melhor artigo segundo</p>
+
+						<footer>
+						<p> Escrito também por Edgar Bruno</p>
+						</footer>		
+					</article>	
+
+{% endblock article %}
+
+{% block aside_news %}
+	<h4> Sobre </h4>
+	Teste de asside
+{% endblock aside_news %}
+

@@ -1,0 +1,152 @@
+{% extends "baseNave.html" %}
+
+{% load staticfiles %}
+
+{% load percentagem %}
+
+{% load crispy_forms_tags %}
+
+{% block big_wrapper %}
+
+<div class="row">
+	<div class="col-md-6 col-sm-offset-2">
+
+		<h1 class="col-sm-offset-3 lead_Custon"> {{ titulo }} </h1>
+
+		<form method="{{ method }}" action="{{ action }}" enctype="multipart/form-data"> 
+			{% csrf_token %}
+			{% for x in formP %}
+
+				
+						{{ x.label_tag }} </br>
+				{{ x }}
+
+
+			{% endfor %}
+	<!--
+			<hr>
+			{% for x in form %}
+				{% if x.field.widget.input_type == 'file' %}
+				{{ x.label_tag }} </br>
+				{{ x }}
+
+				{% endif  %}
+
+			{% endfor %}
+			<hr>
+			
+			{{ form.naveNome.label_tag }}<br />
+			{{ form.naveNome }}
+			
+			<hr>
+			-->
+			{{ form.as_p }}
+			<hr>
+
+			<hr>
+
+
+			{{ formI.as_p }}
+			<hr>
+			{{ formF.as_p|truncatechars:9 }}
+			<hr>
+    {{ formset.management_form }}
+    {% for form in formset.forms %}
+    <div class="item">
+      {{ form.as_p }}
+      <p style=""><a class="delete" href="#">Delete</a></p>
+    </div>
+    {% endfor %}
+    <p><a id="add" href="#">Add detalhe</a></p>
+	<input class="btn {{ Options }} btn-lg col-md-4 col-md-offset-3" type="submit" value="{{ botao }}">
+	</form>
+
+
+	</div>
+
+	<div class="col-sm-4">
+
+		 	<h1> Valores </h1>
+
+		 	<table id="tableDetalhe">
+				<caption>Informativo vendas e estoque</caption>
+				<thead>
+			    	<tr><th colspan="4">Vendas</th></tr>
+			    </thead>
+			    <tbody>
+			    	<tr>
+			    		<td>ESTOQUE</td>
+			    		<td>VENDA</td>
+			    		<td>VENDA %</td>
+			    		<td>SALDO</td>
+
+			    	</tr>
+			    	<tr>
+			    		<td>{{ objVEN.0 }}</td>
+			    		<td>{{ objVEN.1.totalVenda }}</td>
+			    		<td>{{ objVEN.2 }}</td>
+			    		<td>{{ objVEN.1.totalValor }}</td>
+			    	</tr>
+			    </tbody>
+			</table>
+
+
+		 	{% for obj in objRAW %}
+
+
+		 	<table id="tableDetalhe">
+			  <caption>{{ obj.afiliacao }}</caption>
+			  <thead>
+			    <tr><th colspan="4">{{ obj }}</th></tr>
+			  </thead>
+			  <tfoot>
+			    <tr><td colspan="4">
+			    	{% with 'Editar Estoque Venda' as prefix %}
+
+						{% for var in prefix.split %}	
+							{% with URL_l=var|add:"_"|add:linkULR %}
+								<li><a class="btn btn-primary btn-sm"  href="{% url URL_l obj.getnaveNome %}" role="button">{{ var }}</a></li>
+							{% endwith %}
+						{% endfor %}
+
+					{% endwith %}
+			    </td></tr>
+			  </tfoot>
+			  <tbody>
+			    <tr>
+			      <td rowspan="2">
+			      		<a href="{% url 'Exibir_nave' obj.getnaveNome %}">
+			      			<img title="{{ obj }}" class="image_link" border="1" height="75" src="{{ obj.banner.url }}"></td>
+			      		</a>
+			      <td>Estoque</td>
+			      <td>Vendas</td>
+			      <td>Margem</td>
+			    </tr>
+			    <tr>
+			      <td> {% if obj.estoqAtual %}
+			      			{{ obj.estoqAtual }}
+			      	   {% else %}
+			      	   		-
+			      	   {% endif %}
+			      </td>
+			      <td> {% if obj.vendasTotal %}
+			      			{{ obj.vendasTotal }}
+			      	   {% else %}
+			      	   		-
+			      	   {% endif %}
+			      </td>
+			      <!-- Custom tag: retorna percentagem de lucro de cada venda -->
+			      {% with args=obj.vendasTotal|stringformat:"i"|add:" "|add:obj.valorVendasTotal %}
+			     	 <td>{{ obj.valorUni|margemLucro:args }}</td>
+			      {% endwith %}
+			    </tr>
+			  </tbody>
+			</table>
+
+		 	{% endfor %}
+		 	<hr>
+	</div>
+
+</div>
+
+{% endblock %}
