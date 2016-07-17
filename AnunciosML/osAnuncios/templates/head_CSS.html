@@ -1,14 +1,16 @@
-{% load compress %}
+<!--
+ load compress
+-->
 {% load staticfiles %}
 
 <!--
 <link href="{% static 'css/main.css' %}" rel="stylesheet">
 -->
-
-{% compress css %}
+<!--
+compress css
     <link rel="stylesheet" type="text/scss" href="{% static 'css/compress/styles.scss' %}" />
-{% endcompress %}
- 
+endcompress
+ -->
 <!-- remocao bootstrap
 <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
 -->

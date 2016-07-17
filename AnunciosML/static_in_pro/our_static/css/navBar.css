@@ -8,35 +8,14 @@ nav#navbar{
 
 nav#navbar div.container{
 
-   text-shadow: 0 1.5px 0 rgba(0,0,0,0.4);    
-   background: #0038d4; /* layer fill content */
-  -moz-box-shadow:
-    0 3px 4px rgba(7,8,11,.27) /* drop shadow */,
-    inset 0 2px 0 rgba(255,255,255,.31) /* inner shadow */,
-    inset 0 0 10px rgba(0,101,189,.27) /* inner glow */,
-    0 0 0 1px #0271ab /* outer stroke */;
+padding: 5px 50px 5px;
+background: #0064bd;
 
-  -webkit-box-shadow:
-    0 3px 4px rgba(7,8,11,.27) /* drop shadow */,
-    inset 0 2px 0 rgba(255,255,255,.31) /* inner shadow */,
-    inset 0 0 10px rgba(0,101,189,.27) /* inner glow */,
-    0 0 0 1px #0271ab /* outer stroke */;
 
-  box-shadow:
-    0 3px 4px rgba(7,8,11,.27) /* drop shadow */,
-    inset 0 2px 0 rgba(255,255,255,.31) /* inner shadow */,
-    inset 0 0 10px rgba(0,101,189,.27) /* inner glow */,
-    0 0 0 1px #0271ab /* outer stroke */;
- 
-  background-image: -moz-linear-gradient(90deg, #0064bd 0%, #009ced 100%); /* gradient fill */
-  background-image: -o-linear-gradient(90deg, #0064bd 0%, #009ced 100%); /* gradient fill */
-  background-image: -webkit-linear-gradient(90deg, #0064bd 0%, #009ced 100%); /* gradient fill */
-  background-image: linear-gradient(90deg, #0064bd 0%, #009ced 100%); /* gradient fill */
 }
 
-
 nav#navbar #ul_nivel_A > li{
-  display: inline-block;  
+  display: inline-block;
 }
 
 nav#navbar ul a{
@@ -78,11 +57,11 @@ nav#navbar #ul_nivel_A .ul_nivel_B{
 nav#navbar #ul_nivel_A .ul_nivel_B > a{
   color: red;
 }
-#ul_nivel_A > li:not(:last-child) {
-    margin: 5px;
-    border-right: 2px solid #0f3160;    
-}
 
+#ul_nivel_A > li.separ:not(:last-child) {
+  border-right: 2px solid #0f3160;
+
+}
 
 /* SETAS*/
 
@@ -113,4 +92,16 @@ nav#navbar #ul_nivel_A .ul_nivel_B > a{
   border-left: 15px solid red; 
 
 }
-/* FIM SETAS*
+/* FIM SETAS*/
+
+#aid:before{
+  margin-right: 20px;
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+
+  border-top: 27px solid transparent;
+  border-bottom: 27px solid transparent; 
+
+
+}
