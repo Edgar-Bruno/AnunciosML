@@ -2,13 +2,13 @@ nav#navbar{
   top: 0px;
   position: fixed;
   z-index: 999;
-  font: 14px EA Sports Covers SC;
+  font: 15px Hammersmith One;
   width: 100%;
 }
 
 nav#navbar div.container{
 
-padding: 5px 50px 5px;
+padding: 10px 50px 10px;
 background: #0064bd;
 
 
@@ -46,6 +46,7 @@ nav#navbar ul li:hover > a{
 nav#navbar ul li a {
   display: block;
   padding: 10px;
+  
 }
 
 /* fundo do submenu 1 */
@@ -60,12 +61,13 @@ nav#navbar #ul_nivel_A .ul_nivel_B > a{
 
 #ul_nivel_A > li.separ:not(:last-child) {
   border-right: 2px solid #0f3160;
-
 }
 
 /* SETAS*/
 
 #setaEsq:before {
+  padding-right: 10px;
+  margin: -10px;
   content: "";
   display: inline-block;
   vertical-align: middle;
@@ -80,6 +82,7 @@ nav#navbar #ul_nivel_A .ul_nivel_B > a{
 
 
 #setaDir:before{
+  margin: -10px;
   content: "";
   display: inline-block;
   vertical-align: middle;
@@ -95,13 +98,23 @@ nav#navbar #ul_nivel_A .ul_nivel_B > a{
 /* FIM SETAS*/
 
 #aid:before{
-  margin-right: 20px;
+
+  background: #E208A0;
   content: "";
   display: inline-block;
   vertical-align: middle;
 
-  border-top: 27px solid transparent;
-  border-bottom: 27px solid transparent; 
+  border-top: 14px solid transparent;
+  border-bottom: 14px solid transparent;
+
+}
 
 
+.not-active:hover{
+   background: red;
+}
+
+.not-active {
+   pointer-events: none;
+   cursor: default;
 }

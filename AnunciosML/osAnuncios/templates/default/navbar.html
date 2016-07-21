@@ -6,33 +6,32 @@
 <nav id="navbar">
 	<div class="container">
 		<ul id="ul_nivel_A" ><!-- primeiro nivel -->
-			<li class="separ"><a href="{% url 'home' %}">Home</a></li>
-			<li class="slideToggle_aux separ"  data-element="#ul_nivel_B">
+			<li><a href="{% url 'home' %}">Home</a></li>
+			<li  id="aid" class="separ"></li>
+			<li class="slideToggle_aux"  data-element="#ul_nivel_B">
 				<a href="#">Principal</a>
 				<ul id="ul_nivel_B" class="ul_nivel_B"><!-- primeiro segundo -->
 					<li><a href="{% url 'nave' %}">Formulário</a></li>
 					<li><a href="{% url 'listagem' %}">Lista</a></li>
 				</ul>		
 			</li>
-			
-			
+			<li  id="aid" class="separ"></li>			
 			{% if obj %}
-			<li>
-				<div class="separ" id="aid">
-				<!--
-					-Espaçador e delimitador da altura da Navbar 
-				-->		
-				</div>
-			</li>
 
 				{% if navePrev %}
 					<li>
 						<a id="setaEsq" href="{% url 'exibir_nave' navePrev|espacoReplace %}"></a>
 					</li>
+				{% else %}
+
+					<li>
+						<a id="setaEsq" class="not-active"></a>
+					</li>
+
 				{% endif %}
 
 				<li class="slideToggle_aux"  data-element="#ul_nivel_C">
-					<a href="#" class="botao botaoOcult">{{ obj }}</a>
+					<a href="#" class="botaoOcult">{{ obj }}</a>
 
 					<ul id="ul_nivel_C" class="ul_nivel_B"><!-- primeiro segundo -->
 						{% with 'editar estoque venda' as prefix %}
