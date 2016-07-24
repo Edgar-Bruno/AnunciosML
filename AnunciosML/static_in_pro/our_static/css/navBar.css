@@ -9,7 +9,7 @@ nav#navbar{
 nav#navbar div.container{
 
 padding: 10px 50px 10px;
-background: #0064bd;
+background: #008ABD;
 
 
 }
@@ -18,7 +18,7 @@ nav#navbar #ul_nivel_A > li{
   display: inline-block;
 }
 
-nav#navbar ul a{
+nav#navbar ul a.Actived{
   color: #f6f6f6;
   text-decoration: none;
   
@@ -38,7 +38,7 @@ nav#navbar #ul_nivel_A li:hover > .ul_nivel_B {
 }
 
 /* cor do item hover */
-nav#navbar ul li:hover > a{
+nav#navbar ul li:hover > a.Actived{
   background: #4b545f;
   color: white;
 }
@@ -51,11 +51,11 @@ nav#navbar ul li a {
 
 /* fundo do submenu 1 */
 nav#navbar #ul_nivel_A .ul_nivel_B{
-  background: #5f6975;
+  background: #3B618F;
   position: absolute;
 }
 /*cor fonte submenu 1 */
-nav#navbar #ul_nivel_A .ul_nivel_B > a{
+nav#navbar #ul_nivel_A .ul_nivel_B > a.Actived{
   color: red;
 }
 
@@ -65,21 +65,22 @@ nav#navbar #ul_nivel_A .ul_nivel_B > a{
 
 /* SETAS*/
 
-#setaEsq:before {
-  padding-right: 10px;
+#setaEsq:before{
+
   margin: -10px;
   content: "";
   display: inline-block;
   vertical-align: middle;
+  
   
   width: 0; 
   height: 0; 
 
   border-top: 15px solid transparent;
   border-bottom: 15px solid transparent; 
-  border-right: 15px solid red; 
-}
+  border-right: 15px solid #3ED724; 
 
+}
 
 #setaDir:before{
   margin: -10px;
@@ -92,7 +93,7 @@ nav#navbar #ul_nivel_A .ul_nivel_B > a{
 
   border-top: 15px solid transparent;
   border-bottom: 15px solid transparent; 
-  border-left: 15px solid red; 
+  border-left: 15px solid #3ED724; 
 
 }
 /* FIM SETAS*/
@@ -110,11 +111,32 @@ nav#navbar #ul_nivel_A .ul_nivel_B > a{
 }
 
 
-.not-active:hover{
-   background: red;
+.setaEsqNotActive:before {
+
+  margin: -10px;
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  
+  width: 0; 
+  height: 0; 
+
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent; 
+  border-right: 15px solid #537855; 
 }
 
-.not-active {
-   pointer-events: none;
-   cursor: default;
+.setaDirNotActive:before{
+
+  margin: -10px;
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  
+  width: 0; 
+  height: 0; 
+
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent; 
+  border-left: 15px solid #537855;
 }
