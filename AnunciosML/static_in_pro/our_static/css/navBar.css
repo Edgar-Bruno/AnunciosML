@@ -9,8 +9,8 @@ nav#navbar{
 nav#navbar div.container{
 
 padding: 10px 50px 10px;
-background: #008ABD;
-
+background: #8787DE;
+box-shadow: 3px 2px 2px #161650;
 
 }
 
@@ -21,6 +21,8 @@ nav#navbar #ul_nivel_A > li{
 nav#navbar ul a.Actived{
   color: #f6f6f6;
   text-decoration: none;
+  text-shadow: 2px 2px 1px #2c4093;
+  transition: background-color .3s;
   
 }
 
@@ -39,8 +41,9 @@ nav#navbar #ul_nivel_A li:hover > .ul_nivel_B {
 
 /* cor do item hover */
 nav#navbar ul li:hover > a.Actived{
-  background: #4b545f;
+  background: #3737c8;
   color: white;
+  box-shadow: 1px 1px 1px #5f5fd3;
 }
 
 nav#navbar ul li a {
@@ -51,7 +54,7 @@ nav#navbar ul li a {
 
 /* fundo do submenu 1 */
 nav#navbar #ul_nivel_A .ul_nivel_B{
-  background: #3B618F;
+  background: #2C2CA0;
   position: absolute;
 }
 /*cor fonte submenu 1 */
@@ -60,7 +63,7 @@ nav#navbar #ul_nivel_A .ul_nivel_B > a.Actived{
 }
 
 #ul_nivel_A > li.separ:not(:last-child) {
-  border-right: 2px solid #0f3160;
+  border-right: 2px solid #5F5FD3;
 }
 
 /* SETAS*/
@@ -78,7 +81,7 @@ nav#navbar #ul_nivel_A .ul_nivel_B > a.Actived{
 
   border-top: 15px solid transparent;
   border-bottom: 15px solid transparent; 
-  border-right: 15px solid #3ED724; 
+  border-right: 15px solid #161650; 
 
 }
 
@@ -93,7 +96,7 @@ nav#navbar #ul_nivel_A .ul_nivel_B > a.Actived{
 
   border-top: 15px solid transparent;
   border-bottom: 15px solid transparent; 
-  border-left: 15px solid #3ED724; 
+  border-left: 15px solid #161650; 
 
 }
 /* FIM SETAS*/
@@ -123,7 +126,7 @@ nav#navbar #ul_nivel_A .ul_nivel_B > a.Actived{
 
   border-top: 15px solid transparent;
   border-bottom: 15px solid transparent; 
-  border-right: 15px solid #537855; 
+  border-right: 15px solid #5f5fd3; 
 }
 
 .setaDirNotActive:before{
@@ -138,5 +141,5 @@ nav#navbar #ul_nivel_A .ul_nivel_B > a.Actived{
 
   border-top: 15px solid transparent;
   border-bottom: 15px solid transparent; 
-  border-left: 15px solid #537855;
+  border-left: 15px solid #5f5fd3;
 }
